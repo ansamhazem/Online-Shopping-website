@@ -1,0 +1,139 @@
+﻿@model IEnumerable<System_Analysis2.Models.CartItem>
+    @{
+        ViewBag.Title = "ShowCart";
+        Layout = "~/Views/Shared/HomeLayout.cshtml";
+    }
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="short">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="featured-boxes">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="featured-box featured-box-primary align-left mt-sm">
+                                <div class="box-content">
+
+     <table class="shop table cart">
+                                            <thead>
+                                                <tr>
+                                                    <th class="product-remove">
+                                                        &nbsp;
+                                                    </th>
+                                                    <th class="product-thumbnail">
+                                                        &nbsp;
+                                                    </th>
+                                                    <th class="product-name">
+                                                        Product
+                                                    </th>
+                                                    <th class="product-price">
+                                                        Price
+                                                    </th>
+                                                    <th class="product-quantity">
+                                                        Quantity
+                                                    </th>
+                                                    <th class="product-subtotal">
+                                                        Total
+                                                    </th>
+                                                </tr>
+                                            </thead>
+         <tbody>
+             
+             @foreach (var i in Model)
+             {
+                 //using (Html.BeginForm("UpdateCart", "Customer", FormMethod.Post, new { @class = "cart" }))
+                 //{
+                 
+                 <tr class="cart_table_item">
+                     <td class="product-remove">
+                         <a title="Remove this item" class="remove" href="@Url.Action("DeleteItem", new { CartItemID = i.Id})">
+                             <i class="fa fa-times"></i>
+                         </a>
+                     </td>
+                     <td class="product-thumbnail">
+                         <a href="@Url.Action("ShowItem", new { ID = i.Item.Id })">
+                             @{string path = "../../Content/uploadedImgs/" + i.Item.UrlPath;
+                             }
+                             <img width="100" height="100" alt="" class="img-responsive" src="@path">
+                         </a>
+                     </td>
+                     <td class="product-name">
+                         <a href="@Url.Action("ShowItem", new { ID = i.Item.Id })">@i.Item.Name </a>
+                     </td>
+                     <td class="product-price">
+                         <span class="amount">@i.Item.Price</span>
+                     </td>
+                     <td class="product-quantity">
+                             <div class="quantity">
+                                 <span class="amount">@i.ItemQuantity</span>
+</div>
+                     </td>
+                     <td class="product-subtotal">
+                         @{var total = i.ItemQuantity * i.Item.Price;
+                         }
+                         <span class="amount">@total</span>
+                     </td>
+                     @*<td class="actions" colspan="6">
+                         <div class="actions-continue">
+                             <a href="@Url.Action("UpdateCart", "Customer",new { itemId=i.Id,itemQuantity=i.ItemQuantity})">
+                                 <input type="submit" value="Update Cart" name="update_cart" class="btn btn-default">
+                            </a>
+                          </div>
+                     </td>*@
+                 </tr>
+    
+        }
+                             @*}*@
+            
+                <tr class="total">
+                    <td>
+                        <strong style="font-size: 17px;">Cart Total:</strong>
+                    </td>
+                    <td>
+
+                        @{
+                            if (Model.Count() == 0)
+                            {
+                                <strong><span class="amount">0</span></strong>
+                            }
+                            else
+                            {
+                                <strong><span class="amount">@Model.ElementAt(0).Cart.TotalPrice</span></strong>
+
+                            }
+                        }
+
+                    </td>
+                    <td class="actions" colspan="6">
+                        <div class="actions-continue">
+                            <a  href="@Url.Action("MakeOrder","Customer")">
+                            <input type="button" value="CheckOut" name="update_cart" class="btn btn-default">
+                        </a>
+                                </div>
+                    </td>
+                   
+
+                </tr>
+
+ 
+         </tbody>
+
+                                        </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>

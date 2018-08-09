@@ -1,0 +1,70 @@
+﻿@model System_Analysis2.Models.Order
+@{
+    ViewBag.Title = "SuccessOrder";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="short">
+        </div>
+        <div class="col-md-12">
+            <section class="call-to-action featured featured-primary mb-xl">
+                <div class="call-to-action-content" style="width: 100%">
+                    <h3>Your <strong>Order</strong> is <strong>Added</strong> Successfully !</h3>
+                </div>
+            </section>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4 class="heading-primary">Cart Totals</h4>
+            <table class="shop table cart">
+                <tbody>
+                    <tr class="cart-subtotal">
+                        <th>
+                            <strong>Cart Subtotal</strong>
+                        </th>
+                        <td>
+                            <strong><span class="amount">@Session["cartTotal"] </span></strong>
+                        </td>
+                    </tr>
+                    <tr class="shipping">
+                        <th>
+                            Shipping
+                        </th>
+                        <td>
+                            @Model.Shipping.Name
+                        </td>
+                        <td>
+                            <h6>Fees: @Model.Shipping.Fees</h6>
+                        </td>
+                    </tr>
+                     <tr class="shipping">
+                        <th>
+                            Payment
+                        </th>
+                         <td>
+                             @Model.Payment.Name
+                         </td>
+                        <td>
+                                  <h6>Fees: @Model.Payment.Fees</h6>
+                        </td>
+                    </tr>
+                    <tr class="total">
+                        <th>
+                            <strong>Order Total</strong>
+                        </th>
+                        <td>
+                           
+
+                                    <strong><span class="amount">@Model.TotalCost</span></strong>
+                          
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model System_Analysis2.Models.Payment
+
+@{
+    ViewBag.Title = "EditpaymentForm";
+    Layout = "~/Views/Shared/StaffLayout.cshtml";
+}
+
+
+<h2>editpayment</h2>
+
+
+
+<div class="card">
+
+    <div class="container" style="max-width:70%">
+
+
+        <div class="form-horizontal">
+
+            @using (Html.BeginForm("editpayment", "Admin", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.Id)
+
+                <input type="text" name="Name" placeholder="Name" class="form-control" value="@Model.Name" />
+                <br />
+                <input type="number" name="Fees" placeholder="fees" class="form-control" value="@Model.Fees" />
+                <br />
+
+
+
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <br />
+            }
+
+
+        </div>
+    </div>
+</div>

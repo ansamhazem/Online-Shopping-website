@@ -1,0 +1,118 @@
+﻿
+@model System_Analysis2.Models.Users
+@{
+    ViewBag.Title = "loginSignup";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="short">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="featured-boxes">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="featured-box featured-box-primary align-left mt-xlg">
+                            <div class="box-content">
+                                <h4 class="heading-primary text-uppercase mb-md">I'm a Returning Customer</h4>
+                                
+                    @using (Html.BeginForm("Login", "Customer", FormMethod.Post,new { id= "frmSignIn" }))
+                        {
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label> E-mail </label>
+                                                <input type="email" name="Email" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Password</label>
+                                                <input type="password" name="Password" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="submit" value="Login" class="btn btn-primary pull-right mb-xl" data-loading-text="Loading...">
+                                        </div>
+                                    </div>
+}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="featured-box featured-box-primary align-left mt-xlg">
+                            <div class="box-content">
+                                <h4 class="heading-primary text-uppercase mb-md">Register An Account</h4>
+@using (Html.BeginForm("Signup", "Customer", FormMethod.Post, new { id = "frmSignIn" }))
+{
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Name</label>
+                                                <input type="text" value="" name="Name_" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>E-mail Address</label>
+                                                <input type="email" value="" name="Email" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Address</label>
+                                                <input type="text" value="" name="Address" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-12">
+                                                <label>Phone Number</label>
+                                                <input type="tel" value="" name="PhoneNumber" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <div class="col-md-6">
+                                                <label>Password</label>
+                                                <input type="password" value="" name="Password" class="form-control input-lg">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label>Re-enter Password</label>
+                                                <input type="password" value="" name="rePassword" class="form-control input-lg">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <input type="submit" value="Register" class="btn btn-primary pull-right mb-xl" data-loading-text="Loading...">
+                                        </div>
+                                    </div>
+}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

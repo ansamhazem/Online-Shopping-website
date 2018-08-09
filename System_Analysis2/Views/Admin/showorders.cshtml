@@ -1,0 +1,48 @@
+﻿@model System_Analysis2.Models.OrderModel
+
+@{
+    ViewBag.Title = "_showorders";
+    Layout = "~/Views/Shared/StaffLayout.cshtml";
+}
+
+<h2>showorders</h2>
+
+<div class="card">
+
+    <div class="container" style="max-width:100%">
+
+        <table class="table table-bordered">
+            <tr>
+                <td>ID</td>
+                <td>TotalCost</td>
+                <td>Shipping method</td>
+                <td>Payment method</td>
+
+            </tr>
+
+            @foreach (var item in Model.ShowOrders())
+            {
+                <tr>
+                    <td>
+                        @item.Id
+                    </td>
+
+                    <td>
+                        @item.TotalCost
+                    </td>
+                    <td>
+                        @item.Shipping.Name
+                    </td>
+                    <td>
+                        @item.Payment.Name
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+

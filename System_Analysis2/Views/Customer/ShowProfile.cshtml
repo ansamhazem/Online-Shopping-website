@@ -1,0 +1,121 @@
+﻿@model System_Analysis2.ViewModels.UserOrder
+@{
+    ViewBag.Title = "ShowProfile";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="short">
+        </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="tabs tabs-vertical tabs-left tabs-navigation">
+                        <ul class="nav nav-tabs col-sm-3">
+                            <li class="active">
+                                <a href="#tabsNavigation1" data-toggle="tab"><i class="fa fa-user"></i>Personal Data</a>
+                            </li>
+                            <li>
+                                <a href="#tabsNavigation2" data-toggle="tab"><i class="fa fa-shopping-cart"></i>Orders</a>
+                            </li>
+      
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-pane tab-pane-navigation active" id="tabsNavigation1">
+                        <ul class="list list-icons list-icons-style-3 mt-xlg">
+                            @{ var u = Model.user.ShowProfile(Convert.ToInt32(Session["UserId"]));}
+                            <li><i class="fa fa-user "></i> <strong>Name:      </strong>@u.Name_ </li>
+                            <li><i class="fa fa-map-marker"></i> <strong>Address:      </strong>@u.Address</li>
+                            <li><i class="fa fa-phone"></i> <strong>Phone:      </strong> @u.PhoneNumber</li>
+                            <li><i class="fa fa-envelope"></i> <strong>Email:      </strong> @u.Email</li>
+                        </ul>     </div>
+                    <div class="tab-pane tab-pane-navigation" id="tabsNavigation2">
+                        <table class="shop table cart">
+                            <thead>
+                                <tr>
+                                    <th class="product-info">
+                                        Order number
+                                    </th>
+                                    <th class="product-thumbnail">
+                                        &nbsp;
+                                    </th>
+                                    <th class="product-name">
+                                        Product
+                                    </th>
+                                    <th class="product-price">
+                                        Price
+                                    </th>
+                                    <th class="product-quantity">
+                                        Quantity
+                                    </th>
+                                    <th class="product-details">
+                                        Shipping method
+                                    </th>
+                                    <th class="product-details">
+                                        Payment method
+                                    </th>
+                                    <th class="product-subtotal">
+                                        Total
+                                    </th>
+                                </tr>
+                            </thead>
+                            @foreach (var i in Model.order.showCustomerOrders(Convert.ToInt32(Session["UserId"])))
+                            {
+                                foreach (var item in i.items)
+                                {
+                                <tr class="cart_table_item">
+                                    <td class="product-info">
+                                        @i.o.Id
+                                    </td>
+                            
+                                    <td class="product-thumbnail">
+                                        <a href="@Url.Action("ShowItem", new { ID = item.ItemID })">
+                                            @{string path = "../../Content/uploadedImgs/" + item.Item.UrlPath;
+                                            }
+                                            <img width="100" height="100" alt="" class="img-responsive" src="@path">
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a href="@Url.Action("ShowItem", new { ID = item.ItemID })">@item.Item.Name </a>
+                                    </td>
+                                    <td class="product-price">
+                                        <span class="amount">@item.Item.Price</span>
+                                    </td>
+                                    <td class="product-quantity">
+                                        <form enctype="multipart/form-data" method="post" class="cart">
+                                            <div class="quantity">
+                                                @item.ItemQuantity
+                                            </div>
+                                        </form>
+
+                                    </td>
+                                    <td class="product-details">
+
+                                    <span class="amount">@i.o.Shipping.Name</span>
+                                        <span class="amount"><h6>Fees: @i.o.Shipping.Fees</h6></span>
+
+                                    </td>
+                                     <td class="product-subtotal">
+
+                                     <span class="amount">@i.o.Payment.Name</span>
+                                         <span class="amount"><h6>Fees: @i.o.Payment.Fees</h6></span>
+
+                                    </td>
+                                    <td class="product-subtotal">
+                                        
+                                        <span class="amount">@i.o.TotalCost</span>
+                                    </td>
+                                </tr>
+                                                }
+                                            }
+                        </table>
+
+    
+                           </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>

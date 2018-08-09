@@ -1,0 +1,100 @@
+﻿@model System_Analysis2.Models.UsersModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/StaffLayout.cshtml";
+}
+
+
+
+<div class="card">
+
+    <div class="container" style="max-width:100%">
+    <h3>Add staff</h3>
+    <div class="form-inline">
+        @using (Html.BeginForm("_addstaff", "Admin", FormMethod.Post))
+            {
+            <input type="text" name="Name_" placeholder="Name" class="form-control" />
+         
+                <input type="text" name="Email" placeholder="email" class="form-control" />
+                
+                <input type="password" name="Password" placeholder="passwords" class="form-control" />
+               
+                <input type="text" name="Address" placeholder="Address" class="form-control" />
+                
+                <input type="number" name="PhoneNumber" placeholder="phone" class="form-control" />
+             
+
+
+                <br />
+                <div class="form-group">
+                    <br />
+                    <select class="form-control" name="usertype">
+                        <option>Select user type</option>
+                        <option>Admin</option>
+                        <option>stocker</option>
+                    </select>
+
+                </div>
+
+                <br />
+                <br />
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
+        }
+    </div>
+
+    <table class="table table-bordered">
+        <tr>
+            <td>name</td>
+            <td>email</td>
+            <td>addreess</td>
+            <td>user type</td>
+            <td>phone number</td>
+            <td>Edit</td>
+            <td>Delete</td>
+
+        </tr>
+
+                    @foreach (var item in Model.ShowUsers())
+                    {
+                <tr>
+                    <td>
+                        @item.Name_
+                    </td>
+
+                    <td>
+                        @item.Email
+                    </td>
+                    <td>
+                        @item.Address
+                    </td>
+                    <td>
+                        @item.UserType.Name
+                    </td>
+                    <td>
+                        @item.PhoneNumber
+                    </td>
+
+                    <td>
+                        <a class="btn btn-default" href="@Url.Action("EditstaffForm","Admin",new { id=item.Id})">
+                            <span class="glyphicon glyphicon-edit">
+                            </span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="@Url.Action("_deletestaff", "Admin",new { id=item.Id})">
+                            <span class="glyphicon glyphicon-remove">
+                            </span>
+                        </a>
+                    </td>
+
+                </tr>
+                    }
+
+                </table>
+
+            </div>
+</div>
+
+            

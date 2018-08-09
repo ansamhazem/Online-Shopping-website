@@ -1,0 +1,110 @@
+﻿@model System_Analysis2.Models.Shipping_PaymentModel
+
+@{
+    ViewBag.Title = "Index2";
+    Layout = "~/Views/Shared/StaffLayout.cshtml";
+}
+
+<h2>shipping and payment methods</h2>
+
+<div class="card">
+
+    <div class="container" style="max-width:100%">
+        <h3>Add payment method</h3>
+        <div class="form-inline">
+            @using (Html.BeginForm("addpayment", "Admin", FormMethod.Post))
+            {
+                <input type="text" name="Name" placeholder="Name" class="form-control" />
+                <input type="number" name="Fees" placeholder="Fees" class="form-control" />
+           
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            }
+        </div>
+
+        <table class="table table-bordered">
+            <tr>
+                <td>name</td>
+                <td>Fees</td>
+                <td>Edit</td>
+
+            </tr>
+
+            @foreach (var item in Model.paymentlist())
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+
+                    <td>
+                        @item.Fees
+                    </td>
+                    
+
+                    <td>
+                        <a class="btn btn-default" href="@Url.Action("EditpaymentForm","Admin",new { id=item.Id})">
+                            <span class="glyphicon glyphicon-edit">
+                            </span>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>
+
+
+
+<div class="card">
+
+    <div class="container" style="max-width:100%">
+        <h3>Add shipping method</h3>
+        <div class="form-inline">
+            @using (Html.BeginForm("addshipping", "Admin", FormMethod.Post))
+            {
+                <input type="text" name="Name" placeholder="Name" class="form-control" />
+                <input type="number" name="Fees" placeholder="Fees" class="form-control" />
+
+
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            }
+        </div>
+
+        <table class="table table-bordered">
+            <tr>
+                <td>name</td>
+                <td>Fees</td>
+                <td>Edit</td>
+
+            </tr>
+
+            @foreach (var item in Model.shippinglist())
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+
+                    <td>
+                        @item.Fees
+                    </td>
+
+
+                    <td>
+                        <a class="btn btn-default" href="@Url.Action("EditshippingForm","Admin",new { id=item.Id})">
+                            <span class="glyphicon glyphicon-edit">
+                            </span>
+                        </a>
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>

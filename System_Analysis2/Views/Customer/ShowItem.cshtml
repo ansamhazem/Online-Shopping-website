@@ -1,0 +1,88 @@
+﻿@model System_Analysis2.Models.Item
+
+@{
+    ViewBag.Title = "ShowItem";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+
+<div role="main" class="main shop">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <hr class="short">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="owl-carousel owl-theme" data-plugin-options='{"items": 1}'>
+                    <div>
+                        <div class="thumbnail">
+                            @{string path = "../../Content/uploadedImgs/" + Model.UrlPath;
+                            }
+                            <img src="@path" class="img-responsive" alt="" @*style="height: 200px;"*@>
+                        </div>
+                    </div>
+                   
+                </div>
+
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="summary entry-summary">
+
+                    <h1 class="mb-none"><strong>@Model.Name</strong></h1>
+
+
+                    <p class="price">
+                        <span class="amount">@Model.Price</span>
+                    </p>
+
+                    <p class="taller">@Model.Description</p>
+
+@using (Html.BeginForm("AddToCart", "Customer", new { itemID = Model.Id, Quantity = 0 }, FormMethod.Post, new { @class = "cart" }))
+{
+                        <div class="quantity">
+                            <input type="button" class="minus" value="-" onclick="$('#qty1').val($('#qty1').val() - 1); return false;">
+                            <input type="text" class="input-text qty text" title="Qty" value="1" name="quantity" min="1" step="1" max="@Model.Quantity"id="qty1">
+                            <input type="button" class="plus" value="+" onclick="$('#qty1').val(Number($('#qty1').val()) + 1); return false;">
+                        </div>
+                        <button href="@Url.Action("AddToCart", "Customer", new { itemID = Model.Id, Quantity = 0 })" class="btn btn-primary btn-icon">Add to cart</button>
+}
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+$(function () {
+        $('.plus').on('click',function(){
+        var $qty=$(this).closest('p').find('.qty');
+        var currentVal=parseInt($qty.val());
+        if (!isNaN(currentVal)) {
+        $qty.val(currentVal + 1);
+        }
+        });
+        $('.minus').on('click',function(){
+        var $qty=$(this).closest('p').find('.qty');
+        var currentVal=parseInt($qty.val());
+        if (!isNaN(currentVal) && currentVal>
+ 0) {
+            $qty.val(currentVal - 1);
+        }
+    });
+    });
+</script>

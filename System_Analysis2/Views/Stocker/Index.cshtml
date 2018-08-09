@@ -1,0 +1,77 @@
+﻿@model System_Analysis2.Models.ItemModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/StaffLayout.cshtml";
+}
+
+<div class="card">
+
+    <div class="container" style="max-width:100%">
+        <h3>Add New Item</h3>
+        <div class="form-inline">
+            @using (Html.BeginForm("AddNewItem", "Stocker", FormMethod.Post,
+                                    new { enctype = "multipart/form-data" }))
+            {
+                <input type="text" name="Name" placeholder="Name" class="form-control" />
+                <input type="text" name="Description" placeholder="Describtion" class="form-control" />
+                <input type="number" name="Price" placeholder="price" class="form-control" />
+                <input type="number" name="Quantity" placeholder="Quantity" class="form-control" />
+                <input type="text" name="name" class="form-control" placeholder="ItemImageName" />
+                <input type="file" name="file" id="file" style="width: 100%;" />
+                <input type="submit" value="Submit" class="btn btn-primary" />
+            }
+            <br />
+        </div>
+
+
+
+
+
+        <table class="table table-bordered">
+            <tr>
+                <td>Item Name</td>
+                <td>Description</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Edit</td>
+                <td>Delete</td>
+            </tr>
+
+            @foreach (var item in Model.ShowAllItems())
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+
+                    <td>
+                        @item.Description
+                    </td>
+
+                    <td>
+                        @item.Price
+                    </td>
+                    <td>
+                        @item.Quantity
+                    </td>
+
+                    <td>
+                        <a class="btn btn-default" href="@Url.Action("EditItemView","Stocker",new { id=item.Id})">
+                            <span class="glyphicon glyphicon-edit">
+                            </span>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger" href="@Url.Action("DeleteItem","Stocker",new { id=item.Id})">
+                            <span class="glyphicon glyphicon-remove">
+                            </span>
+                        </a>
+                    </td> 
+
+                </tr>
+            }
+
+        </table>
+
+    </div>
+</div>

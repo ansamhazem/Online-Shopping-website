@@ -1,0 +1,161 @@
+﻿@model System_Analysis2.ViewModels.CartShipPay
+@{
+    ViewBag.Title = "MakeOrder";
+    Layout = "~/Views/Shared/HomeLayout.cshtml";
+}
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr class="short">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="mb-none"><strong>Checkout</strong></h2>
+        </div>
+    </div>
+
+    <div class="row">
+@using (Html.BeginForm("MakeOrder", "Customer", FormMethod.Post))
+{
+        <div class="col-md-12">
+
+
+            <div class="panel-group" id="accordion">
+               
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                Shipping Method
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="accordion-body collapse">
+                        <div class="panel-body">
+                            <form action="/" id="frmPayment" method="post">
+                                @foreach (var i in Model.ShPa.shippinglist())
+                                {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="remember-box checkbox">
+                                            <label>
+                                                <input class="checkbox" type="checkbox"  name="ShippingID" value="@i.Id" onclick="">@i.Name
+                                            </label>
+                                            <label>
+                                                <h6>Fees : @i.Fees</h6>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                }
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                Review & Payment
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="accordion-body collapse">
+                        <div class="panel-body">
+                            @* show cart *@
+                            <table class="shop table cart">
+                                <thead>
+                                    <tr>
+                                        <th class="product-thumbnail">
+                                            &nbsp;
+                                        </th>
+                                        <th class="product-name">
+                                            Product
+                                        </th>
+                                        <th class="product-price">
+                                            Price
+                                        </th>
+                                        <th class="product-quantity">
+                                            Quantity
+                                        </th>
+                                        <th class="product-subtotal">
+                                            Total
+                                        </th>
+                                    </tr>
+                                </thead>
+                                @foreach (var i in Model.cart.showcart(Convert.ToInt32(Session["UserId"])))
+                                {
+                                    <tr class="cart_table_item">
+                                        <td class="product-thumbnail">
+                                            <a href="@Url.Action("ShowItem", new { ID = i.Item.Id })">
+                                                @{string path = "../../Content/uploadedImgs/" + i.Item.UrlPath;
+                                                }
+                                                <img width="100" height="100" alt="" class="img-responsive" src="@path">
+                                            </a>
+                                        </td>
+                                        <td class="product-name">
+                                            <a href="@Url.Action("ShowItem", new { ID = i.Item.Id })">@i.Item.Name </a>
+                                        </td>
+                                        <td class="product-price">
+                                            <span class="amount">@i.Item.Price</span>
+                                        </td>
+                                        <td class="product-quantity">
+                                            <form enctype="multipart/form-data" method="post" class="cart">
+                                                <div class="quantity">
+                                                   @i.ItemQuantity
+                                                </div>
+                                            </form>
+
+                                        </td>
+                                        <td class="product-subtotal">
+                                            @{var total = i.ItemQuantity * i.Item.Price;
+                                            }
+                                            <span class="amount">@total</span>
+                                        </td>
+                                    </tr>
+                                                }
+                            </table>
+
+
+                            <hr class="tall">
+
+                            <h4 class="heading-primary">Payment</h4>
+                            @* payment method *@
+                           
+                                @foreach (var i in Model.ShPa.paymentlist())
+                                {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <span class="remember-box checkbox">
+                                            <label>
+                                                <input class="checkbox" type="checkbox" name="PaymentID" value="@i.Id" onclick="">@i.Name
+                                            </label>
+                                            <label>
+                                                <h6>Fees : @i.Fees</h6>
+                                            </label>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                }
+                         
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-continue">
+                <input type="submit" value="Place Order" name="proceed" class="btn btn-lg btn-primary mt-xl">
+            </div>
+ 
+        </div>
+                                                }    
+    </div>
+
+</div>
+

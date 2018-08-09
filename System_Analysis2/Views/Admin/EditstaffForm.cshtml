@@ -1,0 +1,41 @@
+﻿@model System_Analysis2.Models.Users
+
+@{
+    ViewBag.Title = "EditstaffForm";
+    Layout = "~/Views/Shared/StaffLayout.cshtml";
+}
+
+<h2>Editstaff</h2>
+
+<div class="card">
+
+    <div class="container" style="max-width:70%">
+
+
+        <div class="form-horizontal">
+
+            @using (Html.BeginForm("editstaff", "Admin", FormMethod.Post))
+            {
+                @Html.Hidden("id", Model.Id)
+                @Html.Hidden("password", Model.Password)
+                @Html.Hidden("usertypeid", Model.UserTypeID)
+
+                <input type="text" name="Name_" placeholder="Name" class="form-control" value="@Model.Name_" />
+                <br />
+                <input type="text" name="Email" placeholder="email" class="form-control" value="@Model.Email" />
+                <br />
+                <input type="text" name="Address" placeholder="Address" class="form-control" value="@Model.Address" />
+                <br />
+                <input type="number" name="PhoneNumber" placeholder="phone" class="form-control" value="@Model.PhoneNumber" />
+                <br />
+                @*<input type="text"  name="Name" placeholder="usertype" class="form-control" value="@Model.UserType." />*@
+
+
+                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                <br />
+            }
+
+
+        </div>
+    </div>
+</div>
